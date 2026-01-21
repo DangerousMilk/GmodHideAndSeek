@@ -1,0 +1,7 @@
+"gamemode"
+{
+    "base"		"base"
+    "title"		"Hide And Seek"
+    "maps"		""
+    "menusystem"	"1"
+}
