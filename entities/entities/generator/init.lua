@@ -17,7 +17,7 @@ function ENT:Initialize()
     self:SetHoldProgress(0)
     self:SetHoldStart(0)
 
-    self.WorkingSound = "ambient/energy/spark1.wav"
+    --self.WorkingSound = "ambient/energy/spark1.wav"
     self.FixingSound = "ambient/energy/spark1.wav"
     self.RepairedSound = "buttons/button1.wav"
 end
@@ -55,6 +55,9 @@ function ENT:Use(activator, caller, useType, value)
 	    -- Generator fixed
 	    print("I am FULLY charged")
 	    self:SetIsOn(true)
+
+	    SetGlobalInt("FixedGenerators", GetGlobalInt("FixedGenerators") + 1)
+	    print("Fixed " .. GetGlobalInt("FixedGenerators"))
 
 	    self:EmitSound(self.RepairedSound, self.SoundRange)
 	end
