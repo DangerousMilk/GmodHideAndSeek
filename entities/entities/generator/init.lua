@@ -20,8 +20,6 @@ function ENT:Initialize()
     self.WorkingSound = "ambient/energy/spark1.wav"
     self.FixingSound = "ambient/energy/spark1.wav"
     self.RepairedSound = "buttons/button1.wav"
-    self.SoundRange = 85
-    self.FixTime = 5 
 end
 
 function ENT:Use(activator, caller, useType, value)
@@ -47,13 +45,13 @@ function ENT:Use(activator, caller, useType, value)
 	-- add delay
 	if delta % 0.002 == 0 then
 	    -- Spark sound
-	    self:EmitSound(self.FixingSound, self.SoundRange)
+	    self:EmitSound(self.FixingSound, GetConVar("hs_generator_fix_sound_range"):GetInt())
 	end
 
 	print("Using: " .. delta)
 
 	-- Check if fixed
-	if delta >= self.FixTime then
+	if delta >= GetConVar("hs_generator_fix_time"):GetInt() then
 	    -- Generator fixed
 	    print("I am FULLY charged")
 	    self:SetIsOn(true)
@@ -67,9 +65,9 @@ end
 
 function ENT:Think()
     -- Test sound
-    if math.floor(CurTime()) % 2 == 0 then
-	self:EmitSound(self.FixingSound, self.SoundRange)
-    end
+    --if math.floor(CurTime()) % 2 == 0 then
+    --    self:EmitSound(self.FixingSound, GetConVar("hs_generator_fix_sound_range"):GetInt())
+    --end
 
     if self:GetIsOn() then return end
     if self:GetHoldStart() == 0 then return end
