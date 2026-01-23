@@ -54,11 +54,14 @@ function ENT:Use(activator, caller, useType, value)
 	if delta >= GetConVar("hs_generator_fix_time"):GetInt() then
 	    -- Generator fixed
 	    print("I am FULLY charged")
+
+	    -- Variables
 	    self:SetIsOn(true)
-
 	    SetGlobalInt("FixedGenerators", GetGlobalInt("FixedGenerators") + 1)
-	    print("Fixed " .. GetGlobalInt("FixedGenerators"))
 
+	    hook.Run("GeneratorFixed")
+
+	    -- Sound
 	    self:EmitSound(self.RepairedSound, self.SoundRange)
 	end
     end

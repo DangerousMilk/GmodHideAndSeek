@@ -17,3 +17,10 @@ function GM:PlayerSpawn(ply)
 
     SetGlobalInt("FixedGenerators", 0)
 end
+
+hook.Add("GeneratorFixed", "CheckGenerators", function()
+    if GetGlobalInt("FixedGenerators") >= GetConVar("hs_max_generators"):GetInt() then
+	sound.Play("music/Ravenholm_1.mp3", Vector(0, 0, 0), 0, 100, 1)
+	print("Niga")
+    end
+end)

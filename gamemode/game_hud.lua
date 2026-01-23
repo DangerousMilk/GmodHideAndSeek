@@ -1,7 +1,7 @@
 function HUD()
     --surface.SetDrawColor(255,0,0,255)
     --surface.DrawRect(0, 0, 100, 100)
-    draw.RoundedBox(5, 50, 50, 400, 100, Color(0,0,0, 150))
+    draw.RoundedBox(5, 50, 50, 500, 100, Color(0,0,0, 150))
     draw.SimpleText(
 	"Generators " .. GetGlobalInt("FixedGenerators") .. " / " .. GetConVar("hs_max_generators"):GetInt(),
 	"Title",
