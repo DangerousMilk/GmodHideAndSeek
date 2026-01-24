@@ -3,7 +3,7 @@ ENT.Base = "base_gmodentity" -- Specifies that this Entity is based on the 'base
 ENT.PrintName = "Generator" -- The name that will appear in the spawn menu.
 ENT.Author = "realfancymoo" -- The author's name for this Entity.
 ENT.Category = "Hide And Seek" -- The category for this Entity in the spawn menu.
-ENT.Purpose = "Generatot entity" -- The purpose of this Entity.
+ENT.Purpose = "Generator entity" -- The purpose of this Entity.
 ENT.Spawnable = true -- Specifies whether this Entity can be spawned by players in the spawn menu.
 
 function ENT:SetupDataTables()

@@ -1,9 +1,12 @@
 function HUD()
-    --surface.SetDrawColor(255,0,0,255)
-    --surface.DrawRect(0, 0, 100, 100)
+    local fixedGenerators = GetGlobalInt("FixedGenerators")
+    local maxGenerators = GetConVar("hs_max_generators"):GetInt()
+
+    -- Background
     draw.RoundedBox(5, 50, 50, 500, 100, Color(0,0,0, 150))
+    -- Text
     draw.SimpleText(
-	"Generators " .. GetGlobalInt("FixedGenerators") .. " / " .. GetConVar("hs_max_generators"):GetInt(),
+	"Generators " .. fixedGenerators .. " / " .. maxGenerators,
 	"Title",
 	65,
 	65

@@ -7,7 +7,7 @@ function endRound(ply, cmd, args)
 end
 
 function resetGame()
-    SetGlobalInt("FixedGenerators", 0)
+    hook.Run("ResetHideAndSeek")
 end
 
 concommand.Add("hs_start_round", startRound)

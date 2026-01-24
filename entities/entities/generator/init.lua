@@ -20,6 +20,8 @@ function ENT:Initialize()
     --self.WorkingSound = "ambient/energy/spark1.wav"
     self.FixingSound = "ambient/energy/spark1.wav"
     self.RepairedSound = "buttons/button1.wav"
+    self.WorkingSound = "ambient/machines/diesel_engine_idle1.wav"
+    self.workingSoundID = nil
 end
 
 function ENT:Use(activator, caller, useType, value)
@@ -53,20 +55,31 @@ function ENT:Use(activator, caller, useType, value)
 	-- Check if fixed
 	if delta >= GetConVar("hs_generator_fix_time"):GetInt() then
 	    -- Generator fixed
-	    print("I am FULLY charged")
-
 	    -- Variables
 	    self:SetIsOn(true)
-	    SetGlobalInt("FixedGenerators", GetGlobalInt("FixedGenerators") + 1)
 
 	    hook.Run("GeneratorFixed")
 
 	    -- Sound
 	    self:EmitSound(self.RepairedSound, self.SoundRange)
+	    if not self.workingSoundID then
+		self.workingSoundID = self:StartLoopingSound(self.WorkingSound)
+	    end
 	end
     end
 
     self.lastUsed = now
+end
+
+function ENT:ResetGenerator()
+    self:SetIsOn(false)
+    self:SetHoldProgress(0)
+    self:SetHoldStart(0)
+
+    if self.workingSoundID then
+	self:StopLoopingSound(self.workingSoundID)
+	self.workingSoundID = nil
+    end
 end
 
 function ENT:Think()
@@ -80,9 +93,9 @@ function ENT:Think()
 
     -- Last used timer stops updating when the generator
     -- is not being interacted with.
-    if(CurTime() - self.lastUsed >= 0.15) then
+    if(CurTime() - self.lastUsed >= 0.1) then
 	-- Save the current progress
-	self:SetHoldProgress((CurTime() - 0.15) - self:GetHoldStart())
+	self:SetHoldProgress((CurTime()) - self:GetHoldStart())
 	-- Reset
 	self:SetHoldStart(0)
 	print("Stopped")
@@ -90,4 +103,5 @@ function ENT:Think()
 end
 
 function ENT:OnRemove()
+    self:ResetGenerator()
 end
