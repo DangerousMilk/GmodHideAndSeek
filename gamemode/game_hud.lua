@@ -3,13 +3,16 @@ function HUD()
     local maxGenerators = GetConVar("hs_max_generators"):GetInt()
 
     -- Background
-    draw.RoundedBox(5, 50, 50, 500, 100, Color(0,0,0, 150))
+    draw.RoundedBox(5, ScrW() / 2 + 50, 50, 500, 100, Color(0,0,0, 150))
     -- Text
     draw.SimpleText(
 	"Generators " .. fixedGenerators .. " / " .. maxGenerators,
 	"Title",
+	ScrW() / 2 + 65,
 	65,
-	65
+	Color(255, 55, 55, 255),
+	TEXT_ALIGN_CENTER,
+	TEXT_ALIGN_CENTER
     )
 end
 
@@ -31,4 +34,4 @@ surface.CreateFont( "Title", {
 	outline = false,
 } )
 
-hook.Add("HUDPaint", "GameHud", HUD)
+--hook.Add("HUDPaint", "GameHud", HUD)

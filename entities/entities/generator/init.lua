@@ -42,15 +42,12 @@ function ENT:Use(activator, caller, useType, value)
 	-- How long the button was held down for
 	local delta = now - holdStart
 
-	print(delta % 0.1)
 	-- Sound
 	-- add delay
 	if delta % 0.002 == 0 then
 	    -- Spark sound
 	    self:EmitSound(self.FixingSound, GetConVar("hs_generator_fix_sound_range"):GetInt())
 	end
-
-	print("Using: " .. delta)
 
 	-- Check if fixed
 	if delta >= GetConVar("hs_generator_fix_time"):GetInt() then
@@ -93,12 +90,11 @@ function ENT:Think()
 
     -- Last used timer stops updating when the generator
     -- is not being interacted with.
-    if(CurTime() - self.lastUsed >= 0.1) then
+    if(CurTime() - self.lastUsed >= 0.15) then
 	-- Save the current progress
-	self:SetHoldProgress((CurTime()) - self:GetHoldStart())
+	self:SetHoldProgress((CurTime() - 0.15) - self:GetHoldStart())
 	-- Reset
 	self:SetHoldStart(0)
-	print("Stopped")
     end
 end
 
